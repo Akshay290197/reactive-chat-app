@@ -1,0 +1,4 @@
+CREATE TABLE chat.test (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(100)
+);
