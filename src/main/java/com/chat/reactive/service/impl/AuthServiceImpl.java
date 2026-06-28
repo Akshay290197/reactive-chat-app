@@ -4,6 +4,7 @@ import com.chat.reactive.dto.request.LoginRequest;
 import com.chat.reactive.dto.response.LoginResponse;
 import com.chat.reactive.exception.InvalidCredentialsException;
 import com.chat.reactive.repository.UserRepository;
+import com.chat.reactive.security.JwtService;
 import com.chat.reactive.service.interfaces.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,8 @@ import reactor.core.publisher.Mono;
 public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+
     @Override
     public Mono<LoginResponse> login(LoginRequest request) {
         return userRepository.findByEmail(request.getEmail())
@@ -26,6 +29,7 @@ public class AuthServiceImpl implements AuthService {
                     if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
                         return Mono.error(new InvalidCredentialsException("Invalid email or password"));
                     }
+                    String token = jwtService.generateToken(user);
 
                     return Mono.just(
                             LoginResponse.builder()
@@ -33,7 +37,8 @@ public class AuthServiceImpl implements AuthService {
                                     .username(user.getUsername())
                                     .email(user.getEmail())
                                     .displayName(user.getDisplayName())
-                                    .message("Login Successful")
+                                    .accessToken(token)
+                                    .tokenType("Bearer")
                                     .build()
                     );
                 });

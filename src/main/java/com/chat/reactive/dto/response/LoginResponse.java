@@ -14,5 +14,8 @@ public class LoginResponse {
 
     private String displayName;
 
-    private String message;
+    private String accessToken;
+
+    private String tokenType;
+
 }
