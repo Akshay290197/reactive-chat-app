@@ -1,6 +1,9 @@
 package com.chat.reactive.entity;
 
+import com.chat.reactive.enums.MessageStatus;
+import com.chat.reactive.enums.MessageType;
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
