@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table("messages")
+@Table(schema = "chat", name = "messages")
 public class Message extends BaseEntity {
     @Id
     private Long id;

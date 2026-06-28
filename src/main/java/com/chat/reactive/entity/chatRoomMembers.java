@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table("chat_room_members")
+@Table(schema = "chat", name = "chat_room_members")
 public class chatRoomMembers extends BaseEntity {
     @Id
     private Long id;
