@@ -30,4 +30,28 @@ public class GlobalExceptionHandler {
 
         return problemDetail;
     }
+
+    @ExceptionHandler(ChatRoomNotFoundException.class)
+    public ProblemDetail handleChatRoomNotFound(ChatRoomNotFoundException ex) {
+
+        ProblemDetail problemDetail =
+                ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+
+        problemDetail.setTitle("Chat Room Not Found");
+        problemDetail.setDetail(ex.getMessage());
+
+        return problemDetail;
+    }
+
+    @ExceptionHandler(UserAlreadyJoinedException.class)
+    public ProblemDetail handleUserAlreadyJoined(UserAlreadyJoinedException ex) {
+
+        ProblemDetail problemDetail =
+                ProblemDetail.forStatus(HttpStatus.CONFLICT);
+
+        problemDetail.setTitle("User Already Joined");
+        problemDetail.setDetail(ex.getMessage());
+
+        return problemDetail;
+    }
 }
