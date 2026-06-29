@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("users")
+@Table(schema = "chat", name = "users")
 public class User extends BaseEntity {
     @Id
     private Long id;
