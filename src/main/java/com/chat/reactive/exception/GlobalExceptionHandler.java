@@ -54,4 +54,16 @@ public class GlobalExceptionHandler {
 
         return problemDetail;
     }
+
+    @ExceptionHandler(RoomAccessDeniedException.class)
+    public ProblemDetail RoomAccessDenied(RoomAccessDeniedException ex) {
+
+        ProblemDetail problemDetail =
+                ProblemDetail.forStatus(HttpStatus.FORBIDDEN);
+
+        problemDetail.setTitle("User is not a member of room");
+        problemDetail.setDetail(ex.getMessage());
+
+        return problemDetail;
+    }
 }
